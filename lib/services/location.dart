@@ -14,7 +14,7 @@ class Location {
         // Location services are not enabled don't continue
         // accessing the position and request users of the
         // App to enable the location services.
-        return Future.error('Location services are disabled.');
+        await Geolocator.openLocationSettings();
       }
 
       permission = await Geolocator.checkPermission();
@@ -26,7 +26,7 @@ class Location {
           // Android's shouldShowRequestPermissionRationale
           // returned true. According to Android guidelines
           // your App should show an explanatory UI now.
-          await Geolocator.openLocationSettings();
+          return Future.error('Location services are denied.');
         }
       }
 
